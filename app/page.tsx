@@ -22,7 +22,7 @@ function Home() {
 }, [todos]);
 
   const addTodo=()=>{
-    if(!input.trim()) return;
+    if(!input.trim()) return
     if(editingTodoId){
       setTodos((prev)=>prev.map((todo)=>
         todo.id===editingTodoId ?{...todo,text:input}:todo
@@ -55,7 +55,13 @@ function Home() {
       onChange={(e)=>setInput(e.target.value)}
       />
       
-      <button className="bg-blue-600 cursor-pointer text-white p-2 rounded hover:bg-red-500 transition-all" onClick={addTodo} >Add Todo</button>
+      <button onClick={()=>{
+        
+        addTodo()}}
+       className={` text-white p-2 transition-all rounded cursor-pointer ${editingTodoId ? "bg-red-600 hover:bg-red-500" : "bg-blue-600 hover:bg-blue-500"}`}>
+        {editingTodoId?"Update Todo":"Add Todo"}
+        
+      </button>
      
       <TodoList 
       todos={todos}

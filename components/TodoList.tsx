@@ -1,3 +1,4 @@
+import { Alegreya } from 'next/font/google';
 import type {Todo} from '../types/todo'
 interface TodoListProps{
     todos:Todo[],
@@ -13,7 +14,13 @@ const TodoList = ({todos,onDelete,onEdit}:TodoListProps) => {
          key={todo.id}> 
         <h2 className="bg-cyan-900 w-56 p-2 rounded-2xl text-white "> {todo.text}</h2>
          <button className="bg-amber-600 text-white cursor-pointer px-2 py-1 rounded-lg hover:bg-amber-500  active:bg-amber-300 transition-all" onClick={()=>onEdit(todo)}>Edit</button>
-         <button className="bg-red-600 cursor-pointer px-2 py-1 rounded-lg hover:bg-red-500 active:bg-red-300 text-white transition-all" onClick={()=>onDelete(todo.id)}>Delete</button>
+         <button className="bg-red-600 cursor-pointer px-2 py-1 rounded-lg hover:bg-red-500 active:bg-red-300 text-white transition-all" onClick={()=>{
+          const isConfirmed=window.confirm(
+            "Are you sure yo want to delete this Todo?")
+            if(isConfirmed){
+              onDelete(todo.id)
+         } } }>
+          Delete </button>
          </div>
       })}
     </div>
